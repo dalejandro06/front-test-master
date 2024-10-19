@@ -16,6 +16,7 @@ code {
     monospace;
 }
 
+/* Utils classes */
 .absolute-grid {
   display: grid;
 }
@@ -23,4 +24,14 @@ code {
 .absolute-grid > * {
   grid-column: 1;
   grid-row: 1;
+}
+
+.triangle-clip-path {
+  clip-path: polygon(100% -1%, 0 -1%, 0 100%);
+}
+
+@media screen and (min-width: 768px) {
+  .card--item:hover .card--item__actions {
+    display: flex;
+  }
 }
