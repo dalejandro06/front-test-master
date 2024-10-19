@@ -3,9 +3,11 @@ import Header from "../components/Header"
 
 function Main() {
   return (
-    <div className="container">
+    <div className="bg-gray-100">
       <Header />
-      <CardItem />
+      <div className="cards-container p-10">
+        <CardItem />
+      </div>
     </div>
   )
 }

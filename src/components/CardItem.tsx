@@ -2,7 +2,7 @@ import ActionCardButton from "./ActionCardButton"
 
 function CardItem() {
   return (
-    <article className="card--item max-w-[300px] border border-gray-200 shadow-sm relative">
+    <article className="card--item border border-gray-200 shadow-sm relative">
       <div className="bg-white absolute pb-6 pt-3 pl-2 w-[110px] h-[80px] triangle-clip-path">
       <p className="text-sm">35.00 E</p>
       </div>

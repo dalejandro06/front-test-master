@@ -35,3 +35,21 @@ code {
     display: flex;
   }
 }
+
+input {
+  field-sizing: content;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+@media screen and (min-width: 992px) {
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
