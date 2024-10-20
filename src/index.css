@@ -11,21 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* Utils classes */
-.absolute-grid {
-  display: grid;
-}
-
-.absolute-grid > * {
-  grid-column: 1;
-  grid-row: 1;
-}
-
 .triangle-clip-path {
   clip-path: polygon(100% -1%, 0 -1%, 0 100%);
 }
