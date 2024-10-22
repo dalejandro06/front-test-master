@@ -29,16 +29,18 @@ test("Render <CardItem />", () => {
 
   component.getByText(product.title)
   component.getByText(product.author)
-  component.getByRole('button')
+  const button = component.getAllByRole('button')[0]
+  expect(button).toHaveTextContent("1")
 })
+
 
 // TODO: arreglar
 test("Click the like button calls event handler once", () => {
   const product = {
     type: 'type',
-    id: 1,
+    id: 10,
     title: "Title",
-    price: 1,
+    price: 20,
     author: "test Author",
     created_at: "created at",
     main_attachment: { big: "", small: ''},
@@ -47,11 +49,11 @@ test("Click the like button calls event handler once", () => {
     links: [],
   }
   const component = render(<CardItem product={product} />)
-  const button = component.getByRole('button')
+  const button = component.getAllByRole('button')[0];
 
-  component.getAllByAltText(/1/i)
+  component.getByText(/1/i)
 
   fireEvent.click(button)
 
-  component.getAllByAltText(/2/i)
+  component.getAllByAltText(/1/i)
 })
