@@ -27,13 +27,6 @@ function CardItem({ product }: Props) {
       }
     }
   }
-  
-  const changeImage = async () => {
-    const uri = product.links.find((i) => i.rel === "avatar")
-    if (uri) {
-      setImage(uri.uri)
-    }
-  }
 
   return (
     <article className="card--item border border-gray-200 shadow-sm relative overflow-hidden">
@@ -51,7 +44,6 @@ function CardItem({ product }: Props) {
           icon="refresh-ccw"
           count={0}
           flexDirection="row-reverse"
-          onClick={changeImage}
         />
       </div>
       <img src={image} alt={product.title} className="w-full object-cover aspect-square" />
@@ -71,7 +63,6 @@ function CardItem({ product }: Props) {
               icon="refresh-ccw"
               count={0}
               flexDirection="row-reverse"
-              onClick={changeImage}
             />
           </div>
         </div>

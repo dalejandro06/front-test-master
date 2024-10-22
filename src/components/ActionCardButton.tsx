@@ -5,7 +5,7 @@ type Props = {
   icon: string
   flexDirection?: "row" | "row-reverse"
   liked?: boolean
-  onClick: () => void
+  onClick?: () => void
 }
 
 function ActionCardButton({ count, icon, flexDirection = "row", liked, onClick}: Props) {

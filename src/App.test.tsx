@@ -1,8 +1,57 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+import CardItem from './components/CardItem';
 
-test('renders learn react link', () => {
+test('renders header', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const headerLogo = screen.getByAltText(/Logo/i);
+  const inputElement = screen.getByPlaceholderText(/You're looking for something?/i)
+
+  expect(headerLogo).toBeInTheDocument();
+  expect(inputElement).toBeInTheDocument();
 });
+
+
+test("Render <CardItem />", () => {
+    const product = {
+      type: 'type',
+      id: 1,
+      title: "Title",
+      price: 1,
+      author: "test Author",
+      created_at: "created at",
+      main_attachment: { big: "", small: ''},
+      likes_count: 1,
+      liked: false,
+      links: [],
+    }
+  const component = render(<CardItem product={product} />)
+
+  component.getByText(product.title)
+  component.getByText(product.author)
+  component.getByRole('button')
+})
+
+// TODO: arreglar
+test("Click the like button calls event handler once", () => {
+  const product = {
+    type: 'type',
+    id: 1,
+    title: "Title",
+    price: 1,
+    author: "test Author",
+    created_at: "created at",
+    main_attachment: { big: "", small: ''},
+    likes_count: 1,
+    liked: false,
+    links: [],
+  }
+  const component = render(<CardItem product={product} />)
+  const button = component.getByRole('button')
+
+  component.getAllByAltText(/1/i)
+
+  fireEvent.click(button)
+
+  component.getAllByAltText(/2/i)
+})

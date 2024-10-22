@@ -1,8 +1,13 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./views/Main";
 
 function App() {
   return (
-      <Main />
+    <BrowserRouter>
+    <Routes>
+      <Route path="/*" element={<Main />} />
+    </Routes>
+    </BrowserRouter>
   );
 }
 

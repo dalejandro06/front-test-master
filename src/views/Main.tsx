@@ -3,12 +3,17 @@ import CardItem from "../components/CardItem"
 import Header from "../components/Header"
 import { getImages } from "../services/getImages"
 import { FetchStatus, Product } from "../types/interfaces"
+import { useSearchParams } from "react-router-dom"
+import EmptyState from "../components/EmptyState"
 
 function Main() {
   const [products, setProducts] = useState<Product[]>([])
-  const [search, setSearch] = useState("")
   const [status, setStatus] = useState<FetchStatus>("idle")
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filtered, setFiltered] = useState<Product[]>([])
+  const query = searchParams.get('query')
 
+  // Get products once, to save initialState of products
   useEffect(() => {
     setStatus("loading")
     getImages()
@@ -16,18 +21,24 @@ function Main() {
       setProducts(data)
       setStatus("success")
     })
-    .catch((e) => setStatus("error"))
+    .catch(() => setStatus("error"))
   }, [])
 
-  const filteredProducts = search
-   ? products.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
-   : products
+  // filter products when user types
+  useEffect(() => {
+    if (query) {
+      const newData = products.filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
+      setFiltered(newData)
+    } else {
+      setFiltered(products)
+    }
+  }, [query, products])
 
   return (
     <div className="bg-gray-100">
-      <Header
-        searchValue={search}
-        onChange={setSearch}
+      <Header 
+        onChange={(value) => setSearchParams({ query: value })} 
+        initialValue={query || ""}
       />
         {
           status === "loading" && <h1>Cargando...</h1>
@@ -44,9 +55,13 @@ function Main() {
           status === "success" && (
             <div className="cards-container p-10">
               {
-                filteredProducts.map((item) => (
-                  <CardItem key={item.id} product={item} />
-                ))
+                filtered.length ? filtered.map((item) => (
+                    <CardItem 
+                      key={item.id}
+                      product={item}
+                    />)
+                  )
+                : <EmptyState />
               }
             </div>
           )
